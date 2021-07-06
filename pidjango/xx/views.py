@@ -660,7 +660,7 @@ def newrpi(request):
 		xuser = Xuser.objects.get(userid=request.session['userid'])
 		context['menu'] = xuser.get_menu()
 		context['newrpis'] = NewRpi.objects.all().order_by('created')
-		return render(request, 'newrpi.html',context)
+		return render(request, 'new_device.html',context)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class Rpiinfo(View):
@@ -719,7 +719,7 @@ def users(request):
 		bgcolor = 'ffffff'
 		#context['users'] = Xuser.objects.filter(xuser=id).order_by('name')
 		context['users'] = table_bg_color(Xuser.objects.order_by('name'))
-		return render(request, 'users.html',context)
+		return render(request, 'user_list.html',context)
 
 def xnewrpi(request):
 	context = check_user(request)
