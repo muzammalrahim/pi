@@ -272,20 +272,25 @@ def checklogin(request):
 	#if True:
 	try:
 		xuser = Xuser.objects.get(userid=request.POST['userid'])
-		if xuser.failed_logins > 4:
+		print("xuser", xuser)
+
+		if xuser.failed_logins > 100:
 			xuser.failed_logins = 1 + xuser.failed_logins
 			xuser.save()
 			context = {'message': 'Too many failed logins'}
+			print("context",context)
 			return render(request, 'login.html', context)
 		if xuser.activation_code != '' and xuser.activation_code != None:
 			xuser.failed_logins = 1 + xuser.failed_logins
 			xuser.save()
 			context = {'message': 'Account not activated'}
+			print("context", context)
 			return render(request, 'login.html', context)
 		elif xuser.password == request.POST['password']:
 			request.session['lastactive'] = time.time()
 			request.session['userid'] = request.POST['userid']
 			context = {'message': 'Your logged in as ' + request.POST['userid']}
+			print("context",context)
 			xuser.last_login = timezone.now()
 			xuser.failed_logins = 0
 			xuser.save()
@@ -296,10 +301,12 @@ def checklogin(request):
 			xuser.failed_logins = 1 + xuser.failed_logins
 			xuser.save()
 			context = {'message': 'Wrong password'}
+			print("sasa",context)
 			return render(request, 'login.html', context)
 	#else:
 	except:
 		context = {'message': 'Login or register.'}
+		print("context",context)
 		return render(request, 'login.html', context)
 
 def clicommanddelete(request, id):
