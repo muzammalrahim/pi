@@ -10,19 +10,20 @@ LANGUAGE_CHOICES = [
 ]
 COUNTRIES = [
     ('nl', 'Netherlands'),
-    ('be','Belgium'),
-    ('ae','United Arabic Emirates'),
+    ('be', 'Belgium'),
+    ('ae', 'United Arabic Emirates'),
     ('uk', 'United Kingdom'),
     ('us', 'United States'),
 ]
 ROLES = [
-	('admin', 'admin'),
-	('regular','regular'),
+    ('admin', 'admin'),
+    ('regular', 'regular'),
 ]
 DHCP_FIXED = [
-	('dhcp', 'dhcp'),
-	('fixed','fixed'),
+    ('dhcp', 'dhcp'),
+    ('fixed', 'fixed'),
 ]
+
 
 def emptyy(sstr):
     try:
@@ -30,15 +31,17 @@ def emptyy(sstr):
     except:
         return 0
 
+
 class CliCommandForm(forms.Form):
     def clean(self):
         baviaan = 'aap'
 
-    code = forms.CharField(required=True,max_length=18)
-    command = forms.CharField(required=True,widget=forms.Textarea,max_length=500)
-    remark = forms.CharField(required=False,widget=forms.Textarea,max_length=500)
-    last_updated = forms.DateTimeField(required=False,disabled=True)
-    created = forms.DateTimeField(required=False,disabled=True)
+    code = forms.CharField(required=True, max_length=18)
+    command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
+    remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
+    last_updated = forms.DateTimeField(required=False, disabled=True)
+    created = forms.DateTimeField(required=False, disabled=True)
+
 
 class CliCommandNewForm(forms.Form):
     def clean(self):
@@ -53,10 +56,11 @@ class CliCommandNewForm(forms.Form):
             return code
 
     code = forms.CharField(max_length=18)
-    command = forms.CharField(required=True,widget=forms.Textarea,max_length=500)
-    remark = forms.CharField(required=False,widget=forms.Textarea,max_length=500)
-    last_updated = forms.DateTimeField(required=False,disabled=True)
-    created = forms.DateTimeField(required=False,disabled=True)
+    command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
+    remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
+    last_updated = forms.DateTimeField(required=False, disabled=True)
+    created = forms.DateTimeField(required=False, disabled=True)
+
 
 class MyAccountForm(forms.Form):
     class Meta:
@@ -67,13 +71,14 @@ class MyAccountForm(forms.Form):
         baviaan = self.cleaned_data.get('name')
 
     name = forms.CharField(required=False)
-    userid  = forms.CharField(required=False,disabled=True,label="Userid")
+    userid = forms.CharField(required=False, disabled=True, label="Userid")
     email = forms.EmailField(required=False)
-    support_end_date = forms.DateTimeField(required=False,disabled=True)
-    last_login = forms.DateTimeField(required=False,disabled=True)
-    last_updated = forms.DateTimeField(required=False,disabled=True)
-    created = forms.DateTimeField(required=False,disabled=True)
-    id = forms.IntegerField(required=False,disabled=True)
+    support_end_date = forms.DateTimeField(required=False, disabled=True)
+    last_login = forms.DateTimeField(required=False, disabled=True)
+    last_updated = forms.DateTimeField(required=False, disabled=True)
+    created = forms.DateTimeField(required=False, disabled=True)
+    id = forms.IntegerField(required=False, disabled=True)
+
 
 class PasswordForm(forms.Form):
     class Meta:
@@ -87,14 +92,15 @@ class PasswordForm(forms.Form):
             raise forms.ValidationError("Passwords dont match")
             return password
 
-    password = forms.CharField(required=True,widget=forms.PasswordInput)
-    confirm = forms.CharField(required = True,widget=forms.PasswordInput)
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    confirm = forms.CharField(required=True, widget=forms.PasswordInput)
+
 
 class NewNetworkForm(forms.Form):
     class Meta:
         model = NewNetwork
         fields = ('__all__')
-        #fields = ('newssid','psk')
+        # fields = ('newssid','psk')
 
     def clean(self):
         newssid = self.cleaned_data.get('newssid')
@@ -107,27 +113,29 @@ class NewNetworkForm(forms.Form):
         eth_static_IP = self.cleaned_data.get('eth_static_IP')
         eth_router = self.cleaned_data.get('eth_router')
         eth_network_domain = self.cleaned_data.get('eth_network_domain')
-        #if psk == None:
+        # if psk == None:
         #    psk = ''
-        #if newssid == None:
+        # if newssid == None:
         #    newssid = ''
-        #if psk != None and newssid == None :
-        if len(psk) > 0 and len(newssid) == 0 :
+        # if psk != None and newssid == None :
+        if len(psk) > 0 and len(newssid) == 0:
             raise forms.ValidationError("You cant enter a password without SSID")
             return newssid
-        if wlan_dhcp_fixed == 'fixed' and (len(wlan_static_IP) == 0 or len(wlan_router) == 0 or len(wlan_network_domain) == 0):
-        #if wlan_dhcp_fixed == 'fixed' and (emptyy(wlan_static_IP) or emptyy(wlan_router) or emptyy(wlan_network_domain)):
-        #if wlan_dhcp_fixed == 'fixed' and (wlan_static_IP == None  or wlan_router == None  or wlan_network_domain == None):
+        if wlan_dhcp_fixed == 'fixed' and (
+                len(wlan_static_IP) == 0 or len(wlan_router) == 0 or len(wlan_network_domain) == 0):
+            # if wlan_dhcp_fixed == 'fixed' and (emptyy(wlan_static_IP) or emptyy(wlan_router) or emptyy(wlan_network_domain)):
+            # if wlan_dhcp_fixed == 'fixed' and (wlan_static_IP == None  or wlan_router == None  or wlan_network_domain == None):
             raise forms.ValidationError("For fixed wifi IP, enter static IP, router and domain")
             return wlan_dhcp_fixed
-        #if eth_dhcp_fixed == 'fixed' and (emptyy(eth_static_IP) or emptyy(eth_router) or emptyy(eth_network_domain)):
-        if eth_dhcp_fixed == 'fixed' and (len(eth_static_IP) == 0 or len(eth_router) == 0 or len(eth_network_domain) == 0):
+        # if eth_dhcp_fixed == 'fixed' and (emptyy(eth_static_IP) or emptyy(eth_router) or emptyy(eth_network_domain)):
+        if eth_dhcp_fixed == 'fixed' and (
+                len(eth_static_IP) == 0 or len(eth_router) == 0 or len(eth_network_domain) == 0):
             raise forms.ValidationError("For fixed wired IP, enter static IP, router and domain")
-            #self._errors['eth_dhcp_fixed'] = "Passwords must match."
+            # self._errors['eth_dhcp_fixed'] = "Passwords must match."
             return eth_dhcp_fixed
 
-    newssid = forms.CharField(required=False,label="SSID new or to update")
-    psk = forms.CharField(required=False,label="WiFi password",min_length=8)
+    newssid = forms.CharField(required=False, label="SSID new or to update")
+    psk = forms.CharField(required=False, label="WiFi password", min_length=8)
     wlan_dhcp_fixed = forms.TypedChoiceField(choices=DHCP_FIXED)
     wlan_static_IP = forms.GenericIPAddressField(required=False)
     wlan_router = forms.GenericIPAddressField(required=False)
@@ -136,6 +144,7 @@ class NewNetworkForm(forms.Form):
     eth_static_IP = forms.GenericIPAddressField(required=False)
     eth_router = forms.GenericIPAddressField(required=False)
     eth_network_domain = forms.GenericIPAddressField(required=False)
+
 
 class RegisterForm(forms.Form):
     class Meta:
@@ -148,11 +157,47 @@ class RegisterForm(forms.Form):
         if password != confirm:
             raise forms.ValidationError("Passwords dont match")
             return password
-    name = forms.CharField(required=True,min_length=5)
-    userid = forms.CharField(required=True,min_length=5)
-    email = forms.EmailField(required=True)
-    password = forms.CharField(required=True,widget=forms.PasswordInput,min_length=8)
-    confirm = forms.CharField(required=True,widget=forms.PasswordInput)
+
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "name",
+                "class": "form-control"
+            }
+        ))
+    # name = forms.CharField(required=True,min_length=5)
+    userid = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "userid",
+                "class": "form-control"
+            }
+        ))
+    # userid = forms.CharField(required=True, min_length=5)
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control"
+            }
+        ))
+    # email = forms.EmailField(required=True)
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
+    # password = forms.CharField(required=True, widget=forms.PasswordInput, min_length=8)
+    confirm = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control"
+            }
+        ))
+    # confirm = forms.CharField(required=True, widget=forms.PasswordInput)
 
 
 class RpiForm(forms.Form):
@@ -170,16 +215,19 @@ class RpiForm(forms.Form):
     last_seen = forms.DateTimeField(disabled=True)
     id = forms.IntegerField(disabled=True)
 
+
 def check_sizex(name):
     if len(name) < 2:
         raise forms.ValidationError("the name is too short")
     return name
+
 
 class SettingsForm(forms.Form):
     sender = forms.CharField()
     smtp_server = forms.CharField()
     message_new_user = forms.CharField(widget=forms.Textarea)
     free_period_in_months = forms.IntegerField()
+
 
 class XuserForm(forms.Form):
     class Meta:
@@ -191,11 +239,11 @@ class XuserForm(forms.Form):
         cleaned_data = super(XuserForm, self).clean()
         name = cleaned_data.get("name")
         if len(name) < 2:
-            self.add_error('name','name max 10')
+            self.add_error('name', 'name max 10')
         return cleaned_data
 
     def clean(self):
-        #name = self.cleaned_data.get('name')
+        # name = self.cleaned_data.get('name')
         cleaned_data = super(XuserForm, self).clean()
         name = cleaned_data.get("name")
         if len(name) < 2:
@@ -205,16 +253,17 @@ class XuserForm(forms.Form):
             return name
 
     name = forms.CharField()
-    userid  = forms.CharField(disabled=True,label="Userid")
+    userid = forms.CharField(disabled=True, label="Userid")
     email = forms.EmailField(required=False)
-    password = forms.CharField(required=False,widget=forms.PasswordInput)
-    role = forms.TypedChoiceField(required=False,choices=ROLES)
+    password = forms.CharField(required=False, widget=forms.PasswordInput)
+    role = forms.TypedChoiceField(required=False, choices=ROLES)
     failed_logins = forms.IntegerField()
     support_end_date = forms.DateTimeField(disabled=True)
     last_login = forms.DateTimeField(disabled=True)
     last_updated = forms.DateTimeField(disabled=True)
     created = forms.DateTimeField(disabled=True)
     id = forms.IntegerField(disabled=True)
+
 
 class XnewRpiForm(forms.Form):
     class Meta:
@@ -232,5 +281,6 @@ class XnewRpiForm(forms.Form):
             errors['computernr'] = ValidationError('message1', code='invalid')
             raise forms.ValidationError("I didnt find a device with these data.")
             return computernr
+
     computernr = forms.CharField(required=True)
     activation_code = forms.CharField(required=True)
