@@ -319,7 +319,7 @@ def clicommanddelete(request, id):
 		context['menu'] = xuser.get_menu()
 		context['message'] = 'command deleted'
 		context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
-		return render(request, 'clicommands.html',context)
+		return render(request, 'clicommands_list.html',context)
 
 def clicommandedit(request, id=None):
 	context = check_user(request)
@@ -342,16 +342,16 @@ def clicommandedit(request, id=None):
 			clicommand.save()
 			context['message'] = 'data saved d'
 			context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
-			return render(request, 'clicommands.html',context)
+			return render(request, 'clicommands_list.html',context)
 		else:
 			form = CliCommandForm(data=request.POST)
 			context['form'] = form
 			context['message'] = 'we found an error'
-			return render(request, 'clicommandedit.html',context)
+			return render(request, 'clicommandedit_new.html',context)
 	else:
 		context['form'] = CliCommandForm(initial=clicommand.__dict__)
 		context['message'] = 'new cli command'
-		return render(request, 'clicommandedit.html',context)
+		return render(request, 'clicommandedit_new.html',context)
 
 def clicommandnew(request):
 	context = check_user(request)
@@ -373,18 +373,18 @@ def clicommandnew(request):
 			clicommand.save()
 			context['message'] = 'New CLI command added'
 			context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
-			return render(request, 'clicommands.html',context)
+			return render(request, 'clicommands_list.html',context)
 		else:
 			form = CliCommandNewForm(data=request.POST)
 			context['form'] = form
 			context['message'] = 'we found an error'
-			return render(request, 'clicommandnew.html',context)
+			return render(request, 'clicommandnew_add.html',context)
 
 	else:
 		context['form'] = CliCommandNewForm()
 		request.session['id_clicommand'] = None
 		context['message'] = 'new cli command'
-		return render(request, 'clicommandnew.html',context)
+		return render(request, 'clicommandnew_add.html',context)
 
 def clicommands(request):
 	context = check_user(request)
@@ -395,7 +395,7 @@ def clicommands(request):
 		context['menu'] = xuser.get_menu()
 		bgcolor = 'ffffff'
 		context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
-		return render(request, 'clicommands.html',context)
+		return render(request, 'clicommands_list.html',context)
 
 def home(request):
 	context = check_user(request)
@@ -428,13 +428,13 @@ def myaccount(request):
 			context['message'] = 'please repair invalid data x'
 		context['menu'] = xuser.get_menu()
 		context['userid'] = xuser.userid
-		return render(request, 'myaccount.html',context)
+		return render(request, 'myaccount_list.html',context)
 	else:
 		xuser = Xuser.objects.get(userid=request.session['userid'])
 		context['menu'] = xuser.get_menu()
 		context['userid'] = xuser.userid
 		context['form'] = MyAccountForm(initial=xuser.__dict__)
-		return render(request, 'myaccount.html',context)
+		return render(request, 'myaccount_list.html',context)
 
 def password(request):
 	context = check_user(request)
@@ -465,13 +465,13 @@ def password(request):
 			context['message'] = 'passwords dont match'
 		context['menu'] = xuser.get_menu()
 		context['userid'] = xuser.userid
-		return render(request, 'password.html',context)
+		return render(request, 'password_reset.html',context)
 	else:
 		xuser = Xuser.objects.get(userid=request.session['userid'])
 		context['menu'] = xuser.get_menu()
 		context['userid'] = xuser.userid
 		context['form'] = PasswordForm(initial=xuser.__dict__)
-		return render(request, 'password.html',context)
+		return render(request, 'password_reset.html',context)
 
 def newnetworkedit(request):
 	context = check_user(request)
@@ -650,7 +650,7 @@ def settings(request):
 			context['message'] = 'data saved & message sent'
 		except:
 			context['message'] = 'data saved'
-	return render(request, 'settings.html',context)
+	return render(request, 'settings_list.html',context)
 
 def newrpi(request):
 	context = check_user(request)
@@ -707,7 +707,7 @@ def useredit(request, id=None):
 	context['form'] = XuserForm(initial=user.__dict__)
 	context['rpis'] = table_bg_color(user.rpi_set.all())
 	context['newrpis'] =NewRpi.objects.all()
-	return render(request, 'useredit.html',context)
+	return render(request, 'useredit_new.html',context)
 
 def users(request):
 	context = check_user(request)

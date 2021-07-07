@@ -17,11 +17,11 @@
                         <div class="page-header-title">
                             <h5 class="m-b-10">User Table</h5>
                         </div>
-<!--                        <ul class="breadcrumb">-->
-<!--                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>-->
-<!--                            <li class="breadcrumb-item"><a href="#!">Tables</a></li>-->
-<!--                            <li class="breadcrumb-item"><a href="javascript:">Basic Tables</a></li>-->
-<!--                        </ul>-->
+                        <!--                        <ul class="breadcrumb">-->
+                        <!--                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>-->
+                        <!--                            <li class="breadcrumb-item"><a href="#!">Tables</a></li>-->
+                        <!--                            <li class="breadcrumb-item"><a href="javascript:">Basic Tables</a></li>-->
+                        <!--                        </ul>-->
                     </div>
                 </div>
             </div>
@@ -43,14 +43,11 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Userid</th>
                                             <th>Failed</th>
-<!--                                            <th>Label</th>-->
-<!--                                            <th>Duration</th>-->
-<!--                                            <th>Edit</th>-->
-<!--                                            <th>Delete</th>-->
+                                            <th>Detail</th>
                                         </tr>
                                         </thead>
                                         {% for list in users %}
@@ -58,16 +55,14 @@
 
                                         <td>{{ list.id }}</td>
                                         <td>{{ list.name }}</td>
-<!--                                        <td>{{ list.description|safe }}</td>-->
                                         <td>{{ list.userid }}</td>
                                         <td>{{ list.failed_logins }}</td>
-<!--                                        <td>{{list.duration}}</td>-->
-                                        <td>
+
 
                                         <td>
                                             <button type="button" class="btn btn-info" title="btn btn-info"
                                                     data-toggle="tooltip"
-                                                    >Detail
+                                                    onclick="location.href='useredit/{{ list.id }}'">Detail
                                             </button>
                                         </td>
                                         {% endfor %}
@@ -78,99 +73,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- [ basic-table ] end -->
-
-                    <!-- [ Hover-table ] start -->
-                    <!--                    <div class="col-xl-12">-->
-                    <!--                        <div class="card">-->
-                    <!--                            <div class="card-header">-->
-                    <!--                                <h5>Hover Table</h5>-->
-                    <!--                                <span class=D-block m-t-5">use class <code>table-hover</code> inside table element</span>-->
-                    <!--                            </div>-->
-                    <!--                            <div class="card-block table-border-style">-->
-                    <!--                                <div class="table-responsive">-->
-                    <!--                                    <table class="table table-hover">-->
-                    <!--                                        <thead>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th>#</th>-->
-                    <!--                                                <th>First Name</th>-->
-                    <!--                                                <th>Last Name</th>-->
-                    <!--                                                <th>Username</th>-->
-                    <!--                                            </tr>-->
-                    <!--                                        </thead>-->
-                    <!--                                        <tbody>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">1</th>-->
-                    <!--                                                <td>Mark</td>-->
-                    <!--                                                <td>Otto</td>-->
-                    <!--                                                <td>@mdo</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">2</th>-->
-                    <!--                                                <td>Jacob</td>-->
-                    <!--                                                <td>Thornton</td>-->
-                    <!--                                                <td>@fat</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">3</th>-->
-                    <!--                                                <td>Larry</td>-->
-                    <!--                                                <td>the Bird</td>-->
-                    <!--                                                <td>@twitter</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                        </tbody>-->
-                    <!--                                    </table>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!-- [ Hover-table ] end -->
-
-                    <!-- [ stiped-table ] start -->
-                    <!--                    <div class="col-xl-12">-->
-                    <!--                        <div class="card">-->
-                    <!--                            <div class="card-header">-->
-                    <!--                                <h5>Striped Table</h5>-->
-                    <!--                                <span class=D-block m-t-5">use class <code>table-striped</code> inside table element</span>-->
-                    <!--                            </div>-->
-                    <!--                            <div class="card-block table-border-style">-->
-                    <!--                                <div class="table-responsive">-->
-                    <!--                                    <table class="table table-striped">-->
-                    <!--                                        <thead>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th>#</th>-->
-                    <!--                                                <th>First Name</th>-->
-                    <!--                                                <th>Last Name</th>-->
-                    <!--                                                <th>Username</th>-->
-                    <!--                                            </tr>-->
-                    <!--                                        </thead>-->
-                    <!--                                        <tbody>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">1</th>-->
-                    <!--                                                <td>Mark</td>-->
-                    <!--                                                <td>Otto</td>-->
-                    <!--                                                <td>@mdo</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">2</th>-->
-                    <!--                                                <td>Jacob</td>-->
-                    <!--                                                <td>Thornton</td>-->
-                    <!--                                                <td>@fat</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th scope="row">3</th>-->
-                    <!--                                                <td>Larry</td>-->
-                    <!--                                                <td>the Bird</td>-->
-                    <!--                                                <td>@twitter</td>-->
-                    <!--                                            </tr>-->
-                    <!--                                        </tbody>-->
-                    <!--                                    </table>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!-- [ stiped-table ] end -->
                 </div>
                 <!-- [ Main Content ] end -->
             </div>
