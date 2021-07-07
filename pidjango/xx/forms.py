@@ -36,11 +36,62 @@ class CliCommandForm(forms.Form):
     def clean(self):
         baviaan = 'aap'
 
-    code = forms.CharField(required=True, max_length=18)
-    command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
-    remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
-    last_updated = forms.DateTimeField(required=False, disabled=True)
-    created = forms.DateTimeField(required=False, disabled=True)
+    # code = forms.CharField(required=True, max_length=18)
+    code = forms.CharField(
+        required=True,
+        max_length=18,
+        widget=forms.TextInput(
+
+            attrs={
+
+                "placeholder": "code",
+                "class": "form-control"
+            }
+        ))
+    # command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
+    command = forms.CharField(
+        required=True,
+        max_length=500,
+        widget=forms.Textarea(
+
+            attrs={
+
+                "placeholder": "command ",
+                "class": "form-control"
+            }
+        ))
+    # remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
+    remark = forms.CharField(
+        required=False,
+        max_length=500,
+        widget=forms.Textarea(
+
+            attrs={
+
+                "placeholder": "add remarks here  ",
+                "class": "form-control"
+            }
+        ))
+
+    # last_updated = forms.DateTimeField(required=False, disabled=True)
+    last_updated = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # created = forms.DateTimeField(required=False, disabled=True)
+    created = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
 
 
 class CliCommandNewForm(forms.Form):
@@ -55,11 +106,62 @@ class CliCommandNewForm(forms.Form):
             raise forms.ValidationError("This code exists already.")
             return code
 
-    code = forms.CharField(max_length=18)
-    command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
-    remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
-    last_updated = forms.DateTimeField(required=False, disabled=True)
-    created = forms.DateTimeField(required=False, disabled=True)
+    # code = forms.CharField(max_length=18)
+    code = forms.CharField(
+        max_length=18,
+        widget=forms.TextInput(
+
+            attrs={
+
+                "placeholder": "code",
+                "class": "form-control"
+            }
+        ))
+
+    # command = forms.CharField(required=True, widget=forms.Textarea, max_length=500)
+    command = forms.CharField(
+        required=True,
+        max_length=500,
+        widget=forms.Textarea(
+
+            attrs={
+
+                "placeholder": "command ",
+                "class": "form-control"
+            }
+        ))
+    # remark = forms.CharField(required=False, widget=forms.Textarea, max_length=500)
+    remark = forms.CharField(
+        required=False,
+        max_length=500,
+        widget=forms.Textarea(
+
+            attrs={
+
+                "placeholder": "add remarks here  ",
+                "class": "form-control"
+            }
+        ))
+    # last_updated = forms.DateTimeField(required=False, disabled=True)
+    last_updated = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # created = forms.DateTimeField(required=False, disabled=True)
+
+    created = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
 
 
 class MyAccountForm(forms.Form):
@@ -70,14 +172,87 @@ class MyAccountForm(forms.Form):
     def clean(self):
         baviaan = self.cleaned_data.get('name')
 
-    name = forms.CharField(required=False)
-    userid = forms.CharField(required=False, disabled=True, label="Userid")
-    email = forms.EmailField(required=False)
-    support_end_date = forms.DateTimeField(required=False, disabled=True)
-    last_login = forms.DateTimeField(required=False, disabled=True)
-    last_updated = forms.DateTimeField(required=False, disabled=True)
-    created = forms.DateTimeField(required=False, disabled=True)
-    id = forms.IntegerField(required=False, disabled=True)
+    # name = forms.CharField(required=False)
+    name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+
+            attrs={
+
+                "placeholder": "name",
+                "class": "form-control"
+            }
+        ))
+
+    # userid = forms.CharField(required=False, disabled=True, label="Userid")
+    userid = forms.CharField(
+        required=False,
+        disabled=True,
+        label="Userid",
+        widget=forms.TextInput(
+
+            attrs={
+
+                "placeholder": "user id ",
+                "class": "form-control"
+            }
+        ))
+    # email = forms.EmailField(required=False)
+    email = forms.EmailField(
+        required=False,
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control"
+            }
+        ))
+    # support_end_date = forms.DateTimeField(required=False, disabled=True)
+    support_end_date = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # last_login = forms.DateTimeField(required=False, disabled=True)
+    last_login = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+
+    # last_updated = forms.DateTimeField(required=False, disabled=True)
+    last_updated = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+
+    # created = forms.DateTimeField(required=False, disabled=True)
+    created = forms.CharField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # id = forms.IntegerField(required=False, disabled=True)
+    id = forms.IntegerField(
+        required=False,
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
 
 
 class PasswordForm(forms.Form):
@@ -92,8 +267,23 @@ class PasswordForm(forms.Form):
             raise forms.ValidationError("Passwords dont match")
             return password
 
-    password = forms.CharField(required=True, widget=forms.PasswordInput)
-    confirm = forms.CharField(required=True, widget=forms.PasswordInput)
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
+
+    # password = forms.CharField(required=True, widget=forms.PasswordInput)
+    # confirm = forms.CharField(required=True, widget=forms.PasswordInput)
+    confirm = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control"
+            }
+        ))
 
 
 class NewNetworkForm(forms.Form):
@@ -223,10 +413,42 @@ def check_sizex(name):
 
 
 class SettingsForm(forms.Form):
-    sender = forms.CharField()
-    smtp_server = forms.CharField()
-    message_new_user = forms.CharField(widget=forms.Textarea)
-    free_period_in_months = forms.IntegerField()
+    sender = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Sender",
+                "class": "form-control"
+            }
+        ))
+
+    smtp_server = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "smtp server",
+                "class": "form-control"
+            }
+        ))
+    message_new_user = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "message new user",
+                "class": "form-control"
+            }
+        ))
+    free_period_in_months = forms.IntegerField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "free period in months",
+                "class": "form-control"
+            }
+
+        )
+    )
+
+    # sender = forms.CharField()
+    # smtp_server = forms.CharField()
+    # message_new_user = forms.CharField(widget=forms.Textarea)
+    # free_period_in_months = forms.IntegerField()
 
 
 class XuserForm(forms.Form):
@@ -252,17 +474,89 @@ class XuserForm(forms.Form):
             raise forms.ValidationError("Name should be at least 10 characters")
             return name
 
-    name = forms.CharField()
-    userid = forms.CharField(disabled=True, label="Userid")
-    email = forms.EmailField(required=False)
-    password = forms.CharField(required=False, widget=forms.PasswordInput)
+    # name = forms.CharField()
+    name = forms.CharField(
+        widget=forms.TextInput(
+
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # userid = forms.CharField(disabled=True, label="Userid")
+    userid = forms.CharField(
+        disabled=True,
+        label="Userid",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # email = forms.EmailField(required=False)
+    email = forms.EmailField(
+        required=False,
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control"
+            }
+        ))
+    # password = forms.CharField(required=False, widget=forms.PasswordInput)
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
     role = forms.TypedChoiceField(required=False, choices=ROLES)
-    failed_logins = forms.IntegerField()
-    support_end_date = forms.DateTimeField(disabled=True)
-    last_login = forms.DateTimeField(disabled=True)
-    last_updated = forms.DateTimeField(disabled=True)
-    created = forms.DateTimeField(disabled=True)
-    id = forms.IntegerField(disabled=True)
+
+    # failed_logins = forms.IntegerField()
+    failed_logins = forms.IntegerField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # support_end_date = forms.DateTimeField(disabled=True)
+    support_end_date = forms.CharField(
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # last_login = forms.DateTimeField(disabled=True)
+    last_login = forms.CharField(
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # last_updated = forms.DateTimeField(disabled=True)
+    last_updated = forms.CharField(
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # created = forms.DateTimeField(disabled=True)
+    created = forms.CharField(
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
+    # id = forms.IntegerField(disabled=True)
+    id = forms.CharField(
+        disabled=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        ))
 
 
 class XnewRpiForm(forms.Form):
