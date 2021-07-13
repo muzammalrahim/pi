@@ -122,3 +122,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATETIME_FORMAT = 'Y-m-d H:i'
 SHORT_DATETIME_FORMAT = ['%Y-%m-%d H:%M']
+
+
+X_FRAME_OPTIONS = 'ALLOW-FROM https://nextcloud.com/'

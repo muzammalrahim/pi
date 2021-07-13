@@ -15,7 +15,8 @@ from .forms import XuserForm, CliCommandForm, CliCommandNewForm, MyAccountForm, 
 import datetime
 from django.views import View
 from django.utils.decorators import method_decorator
-
+from django.views.decorators.clickjacking import xframe_options_sameorigin
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 def add_device_to_user(newrpi_id, user_id):
     newrpi = NewRpi.objects.get(pk=newrpi_id)
@@ -787,3 +788,7 @@ def xrpis(request):
         context['menu'] = xuser.get_menu()
         context['newrpis'] = table_bg_color(Rpi.objects.filter(xuser_id=xuser.id).order_by('created'))
         return render(request, 'xrpis.html', context)
+
+@xframe_options_sameorigin
+def nextcloud(request):
+    return render(request, 'iframe.html', {})
