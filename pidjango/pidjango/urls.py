@@ -24,5 +24,5 @@ urlpatterns = [
 #    path('', xx.site.index, name='index'),
 #    path('//', views.index, name='index'),
     path('', views.index, name='index'),
-    path('xx/', include('xx.urls')),
+    path('', include('xx.urls')),
 ]
