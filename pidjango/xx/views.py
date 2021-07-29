@@ -18,6 +18,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 
+
 def add_device_to_user(newrpi_id, user_id):
     newrpi = NewRpi.objects.get(pk=newrpi_id)
     rpi = Rpi()
@@ -281,45 +282,36 @@ def check_user(request):
 # @csrf_exempt
 def checklogin(request):
     # if True:
-    # try:
-    xuser = Xuser.objects.get(userid=request.POST['userid'])
-    print("xuser", xuser)
-
-    if xuser.failed_logins > 4:
-        xuser.failed_logins = 1 + xuser.failed_logins
-        xuser.save()
-        context = {'message': 'Too many failed logins'}
-        print("context", context)
-        return render(request, 'login.html', context)
-    if xuser.activation_code != '' and xuser.activation_code != None:
-        xuser.failed_logins = 1 + xuser.failed_logins
-        xuser.save()
-        context = {'message': 'Account not activated'}
-        print("context", context)
-        return render(request, 'login.html', context)
-    elif xuser.password == request.POST['password']:
-        request.session['lastactive'] = time.time()
-        request.session['userid'] = request.POST['userid']
-        if request.session['userid']:
-            return HttpResponseRedirect('/newrpi')
-        context = {'message': 'Your logged in as ' + request.POST['userid']}
-        print("context", context)
-        xuser.last_login = timezone.now()
-        xuser.failed_logins = 0
-        xuser.save()
-        context['menu'] = xuser.get_menu()
-        context['content'] = 'Latest news: we just sold rpi number 250 !.'
-        return render(request, 'home.html', context)
-    elif xuser.password != request.POST['password']:
-        xuser.failed_logins = 1 + xuser.failed_logins
-        xuser.save()
-        context = {'message': 'Wrong password'}
-        print("sasa", context)
-        return render(request, 'login.html', context)
-    else:
-        # # except:
+    try:
+        xuser = Xuser.objects.get(userid=request.POST['userid'])
+        if xuser.failed_logins > 4:
+            xuser.failed_logins = 1 + xuser.failed_logins
+            xuser.save()
+            context = {'message': 'Too many failed logins'}
+            return render(request, 'login.html', context)
+        if xuser.activation_code != '' and xuser.activation_code != None:
+            xuser.failed_logins = 1 + xuser.failed_logins
+            xuser.save()
+            context = {'message': 'Account not activated'}
+            return render(request, 'login.html', context)
+        elif xuser.password == request.POST['password']:
+            request.session['lastactive'] = time.time()
+            request.session['userid'] = request.POST['userid']
+            context = {'message': 'Your logged in as ' + request.POST['userid']}
+            xuser.last_login = timezone.now()
+            xuser.failed_logins = 0
+            xuser.save()
+            context['menu'] = xuser.get_menu()
+            context['content'] = 'Latest news: we just sold rpi number 250 !.'
+            return render(request, 'home.html', context)
+        else:
+            xuser.failed_logins = 1 + xuser.failed_logins
+            xuser.save()
+            context = {'message': 'Wrong password'}
+            return render(request, 'login.html', context)
+    # else:
+    except:
         context = {'message': 'Login or register.'}
-        print("context", context)
         return render(request, 'login.html', context)
 
 
@@ -788,6 +780,7 @@ def xrpis(request):
         context['menu'] = xuser.get_menu()
         context['newrpis'] = table_bg_color(Rpi.objects.filter(xuser_id=xuser.id).order_by('created'))
         return render(request, 'xrpis.html', context)
+
 
 @xframe_options_sameorigin
 def nextcloud(request):
