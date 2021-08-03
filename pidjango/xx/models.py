@@ -13,7 +13,7 @@ class Xuser(models.Model):
 	activation_code_nw_email = models.CharField(max_length=12,blank=True, null=True)
 	last_login = models.DateTimeField()
 	created = models.DateTimeField(blank=True, auto_now_add=True)
-	support_end_date = models.DateTimeField(blank=True,default='2021-05-22')
+	support_end_date = models.DateField(blank=True,default='2021-05-22')
 	last_updated = models.DateTimeField(blank=True)
 	failed_logins = models.IntegerField(blank=True, default=0)
 	ROLES = [
