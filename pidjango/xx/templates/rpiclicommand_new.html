@@ -1,0 +1,77 @@
+{% extends "home.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+
+                        <ul class="breadcrumb">
+                            <table width=100%>
+                                <tr>
+                                    <td colspan=3>Home
+                                        {% for k,v in breadcrumb.items %}
+                                        > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+                                        {% endfor %}<br>&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>CLI LOG</h5>
+                            </div>
+
+                        </div>
+
+                        <table class="table">
+                            &nbsp;
+                            <tr class="h3">
+                                <td>Created
+                                <td>Done
+                                <td>Sent
+                                <td>Response
+                            </tr>
+                            {% for value in rpiclicommands %}
+                            <tr style="background-color: {{ value.bgcolor }};">
+                                <td>{{ value.created }}
+                                <td>{% if value.last_updated != None %}{{ value.last_updated }}{% endif %}
+                                <td>{{ value.sent }}
+                                <td>{% if value.response != None %}{{ value.response }}{% endif %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

@@ -1,0 +1,109 @@
+{% extends "home.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+
+
+</script>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+
+                        <ul class="breadcrumb">
+                            <table width=100%>
+                                <tr>
+                                    <td colspan=3>Home
+                                        {% for k,v in breadcrumb.items %}
+                                        > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+                                        {% endfor %}<br>&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>NETWORK LOG</h5>
+                            </div>
+
+                        </div>
+
+                        <table width=100%>
+
+                            <td colspan=5>
+                                <form method="POST" action="/newnetworkedit">{% csrf_token %}
+                                    <input type="submit" value="Add" class="btn btn-primary">
+                                </form>
+                                </tr>
+                            </td>
+                            <tr class="h3">
+                                <td valign=top>Id
+                                <td>Created at<br>Done
+                                <td valign=top>SSID
+                                <td valign=top>WiFi
+                                <td valign=top>Fixed
+                            </tr>
+                            {% for value in newnetworks %}
+                            <tr style="background-color: {{ value.bgcolor }};">
+                                <td valign=top>{{ value.id }}
+                                <td valign=top>Created:{{ value.created }}<br>Done: {% if value.last_updated != None
+                                    %}{{ value.last_updated }}s
+                                <td valign=top>{{ value.newssid }}{% if value.psk != "" and value.psk != None %}<br>{{
+                                    value.psk }}{% else %}-no password-{% endif %}
+                                <td valign=top>{{ value.wlan_dhcp_fixed }}
+                                    {% if value.wlan_static_IP != "" and value.wlan_static_IP != None %}<br>static:
+                                    {{
+                                    value.wlan_static_IP }}{% endif %}
+                                    {% if value.wlan_router != "" and value.wlan_router != None %}<br>router: {{
+                                    value.wlan_router }}{% endif %}
+                                    {% if value.wlan_network_domain != "" and value.wlan_network_domain != None
+                                    %}<br>domain:
+                                    {{ value.wlan_network_domain }}
+                                <td valign=top>{{ value.eth_dhcp_fixed }}
+                                    {% if value.eth_static_IP != "" and value.eth_static_IP != None %}<br>static: {{
+                                    value.eth_static_IP }}{% endif %}
+                                    {% if value.eth_router != "" and value.eth_router != None %}<br>router: {{
+                                    value.eth_router }}{% endif %}
+                                    {% if value.eth_network_domain != "" and value.eth_network_domain != None %}<br>domain:
+                                    {{ value.eth_network_domain }}{% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

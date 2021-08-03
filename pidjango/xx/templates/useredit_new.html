@@ -12,18 +12,7 @@
         <!-- [ breadcrumb ] start -->
         <div class="page-header">
             <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Form Elements</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                            <!--                            <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>-->
-                            <!--                            <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>-->
-                        </ul>
-                    </div>
-                </div>
+
             </div>
         </div>
         <!-- [ breadcrumb ] end -->
@@ -34,24 +23,66 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>User Form</h5>
+                                <h5> CREATE USER</h5>
                             </div>
                             <div class="card-body">
-                                <!--                                <h5>Form controls</h5>-->
-                                <!--                                <hr>-->
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <form method="post" action="/xx/useredit" autocomplete="off">
+                                        <form action="/useredit" method="post" autocomplete="off">
                                             {% csrf_token %}
+                                            <input type=hidden name=xxid value="{{ xxid }}">
                                             {{ form.as_p }}
-                                          <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="card-header">
+                            <h5>Current Devices</h5>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Computernr</th>
+                                <th>Last seen</th>
+                                <th>IP wifi</th>
+                                <th>IP fixed</th>
+                                <th>Created</th>
+                            </tr>
+                            </thead>
+                            {% for value in rpis %}
+                            <tr style="background-color: {{ value.bgcolor }};">
+                                <td><a href="/rpiedit/{{ value.id }}">Details</a></td>
+                                <td>{{ value.computernr }}
+                                <td>{{ value.last_seen }}
+                                <td>{{ value.ipAddressWlan }}
+                                <td>{{ value.ipAddressEth }}
+                                <td>{{ value.created }}
+                            </tr>
+                            {% endfor %}
+                            <!--                                        <button type="button" class="btn btn-danger" title="btn btn-danger" data-toggle="tooltip">Danger</button>-->
+                            </tbody>
+                        </table>
+<!--                        <table>-->
+<!--                            <tr style="font-weight: bold;">-->
+<!--                                <td>-->
+<!--                                <td><br>Add device-->
+<!--                                <td rowspan=2 valign=bottom>-->
+<!--                                    <input type=submit value=ADD class="btn btn-primary">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                <td>&lt;!&ndash; form action="/xx/useredit" method="post" &ndash;&gt;-->
+<!--                                    <select name=addnewrpi>-->
+<!--                                        <option value=0>Choose one-->
+<!--                                            {% for value in newrpis %}-->
+<!--                                        <option value={{ value.id }}>{{ value.id }} {{ value.computernr}}-->
+<!--                                            {% endfor %}-->
+<!--                                    </select>-->
+<!--                                <td>-->
+<!--                        </table>-->
                     </div>
                 </div>
             </div>
