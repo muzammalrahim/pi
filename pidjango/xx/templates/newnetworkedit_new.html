@@ -6,7 +6,15 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+{% load static %}
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 
+
+
+</script>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <!-- [ breadcrumb ] start -->
@@ -18,9 +26,15 @@
                             <h5 class="m-b-10">Form Elements</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                            <!--                            <li class="breadcrumb-item"><a href="javascript:">Form Componants</a></li>-->
-                            <!--                            <li class="breadcrumb-item"><a href="javascript:">Form Elements</a></li>-->
+                            <table width=100%>
+                                <tr>
+                                    <td colspan=3>Home
+                                        {% for k,v in breadcrumb.items %}
+                                        > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+                                        {% endfor %}<br>&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
                         </ul>
                     </div>
                 </div>
@@ -34,24 +48,20 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Settings Form</h5>
+                                <h5>Add Networks</h5>
                             </div>
-                            <div class="card-body">
-                                <!--                                <h5>Form controls</h5>-->
-                                <!--                                <hr>-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <form method="post" action="/settings">
-                                            {% csrf_token %}
-                                            {{ form.as_p }}
 
-                                          <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
+                        <table width=100%>
+                            <form action="/newnetworks" method="post">{% csrf_token %}
+                                <input type=hidden name=xxid value="{{ xxid }}">
+                                <input type=hidden name=coming_from value=newnetwork>
+                                {{ form }}
+                                <br>
+                                <button type="submit" class="btn btn-primary">SAVE</button>
+                            </form>
+                        </table>
 
                     </div>
                 </div>

@@ -1,0 +1,69 @@
+{% extends "home.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <tr>
+                                <td colspan=3>Home
+                                    {% for k,v in breadcrumb.items %}
+                                    > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+                                    {% endfor %}<br>&nbsp;
+                                </td>
+                            </tr>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>RPI Log </h5>
+                            </div>
+
+                            <table class="table">
+
+                                <tr class="h3" valign=top style="font-size: 13px;">
+                                    <td>Created&nbsp;at
+                                    <td>Text
+                                </tr>
+                                {% for value in rpiloglines %}
+                                <tr valign=top bgcolor="e6e6e6"
+                                    style="font-size: 10px; background-color: {{ value.bgcolor }};">
+                                    <td width=111px>{{ value.created }}
+                                    <td>{{ value.text }}
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

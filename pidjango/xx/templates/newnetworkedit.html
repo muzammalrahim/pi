@@ -16,11 +16,11 @@
 <table width=100%>
   <tr><td colspan=3>Home
     {% for k,v in breadcrumb.items  %}
-       > <a href="/xx/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+       > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
     {% endfor %}<br>&nbsp;
 </table>
 <table width=100%>
-<form action="/xx/newnetworks" method="post">{% csrf_token %}
+<form action="/newnetworks" method="post">{% csrf_token %}
   <input type=hidden name=xxid value="{{ xxid }}">
   <input type=hidden name=coming_from value=newnetwork>
   {{ form }}

@@ -1,0 +1,90 @@
+{% extends "home.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Current Rpi Status</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <table>
+                                <tr>
+                                    <td colspan=3>Home
+                                        {% for k,v in breadcrumb.items %}
+                                        > <a href="/{{ k }}edit/{{ v }}"> {{ k }}</a>&nbsp;&nbsp;
+                                        {% endfor %}<br>&nbsp;
+                                <tr>
+                                    <td>
+                                        <form action="/rpilogline" method="post">{% csrf_token %}
+                                            <button type="submit" class="btn btn-primary">General Log</button>&nbsp;&nbsp;&nbsp;
+                                        </form>
+                                    <td>
+                                        <form action="/rpiclicommand" method="post">{% csrf_token %}
+                                            <button type="submit" class="btn btn-primary">CLI log</button>&nbsp;&nbsp;&nbsp;
+                                        </form>
+                                    <td>
+                                        <form action="/newnetworks" method="post">{% csrf_token %}
+                                            <input type=hidden name=xxid value="{{ xxid }}">
+                                            <button type="submit" class="btn btn-primary">Network</button>&nbsp;&nbsp;&nbsp;
+                                        </form>
+                            </table>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>User Form</h5>
+                            </div>
+                            <!--                            <div class="card-body">-->
+                            <!--                                &lt;!&ndash;                                <h5>Form controls</h5>&ndash;&gt;-->
+                            <!--                                &lt;!&ndash;                                <hr>&ndash;&gt;-->
+                            <!--                                <div class="row">-->
+                            <!--                                    <div class="col-md-6">-->
+                            <!--                                        <form method="post" action="/useredit">-->
+                            <!--                                            {% csrf_token %}-->
+                            <!--                                            {{ form.as_p }}-->
+                            <!--                                            <button type="submit" class="btn btn-primary">Submit</button>-->
+                            <!--                                        </form>-->
+
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        </div>
+                        <table width=100%>
+                            {{ form }}
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+

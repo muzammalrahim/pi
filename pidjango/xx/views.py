@@ -540,7 +540,7 @@ def newnetworkedit(request):
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['menu'] = xuser.get_menu()
         context['form'] = NewNetworkForm()
-        return render(request, 'newnetworkedit.html', context)
+        return render(request, 'newnetworkedit_new.html', context)
 
 
 def newnetworks(request):
@@ -576,14 +576,14 @@ def newnetworks(request):
                 context['message'] = 'data saved'
             else:
                 context['form'] = form
-                return render(request, 'newnetworkedit.html', context)
+                return render(request, 'newnetworkedit_new.html', context)
     else:
         context['form'] = NewNetworkForm()
-        return render(request, 'newnetworks.html', context)
+        return render(request, 'newnetworks_new.html', context)
 
     context['xxid'] = id
     context['newnetworks'] = table_bg_color(NewNetwork.objects.filter(rpi=id).order_by('-created'))
-    return render(request, 'newnetworks.html', context)
+    return render(request, 'newnetworks_new.html', context)
 
 
 # return HttpResponseRedirect(request.path)
@@ -646,7 +646,7 @@ def rpiclicommand(request):
         context['menu'] = xuser.get_menu()
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['rpiclicommands'] = table_bg_color(RpiCliCommand.objects.filter(rpi=id).order_by('-created'))
-        return render(request, 'rpiclicommand.html', context)
+        return render(request, 'rpiclicommand_new.html', context)
 
 
 def rpiedit(request, id=None):
@@ -672,7 +672,7 @@ def rpiedit(request, id=None):
     rpi = Rpi.objects.get(pk=id)
     sstr = rpi.__dict__
     context['form'] = RpiForm(initial=sstr)
-    return render(request, 'rpiedit.html', context)
+    return render(request, 'rpiedit_new.html', context)
 
 
 def rpilogline(request):
@@ -685,7 +685,7 @@ def rpilogline(request):
         context['menu'] = xuser.get_menu()
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['rpiloglines'] = table_bg_color(RpiLogline.objects.filter(rpi=id).order_by('-created'))
-        return render(request, 'rpilogline.html', context)
+        return render(request, 'rpilogline_new.html', context)
 
 
 def settings(request):
@@ -753,18 +753,18 @@ def useredit(request, id=None):
         return HttpResponseRedirect('/../index.html')
     elif request.method == 'POST':
         # save data existing user
-        if int(request.POST['addnewrpi']) == 0:
-            user.name = request.POST['name']
-            if len(request.POST['password']) > 0:
-                user.password = request.POST['password']
-            user.email = request.POST['email']
-            user.role = request.POST['role']
-            user.last_updated = timezone.now()
-            user.failed_logins = int(request.POST['failed_logins'])
-            user.save()
-        else:
-            # add device to this user
-            add_device_to_user(int(request.POST['addnewrpi']), id)
+        # if int(request.POST['addnewrpi']) == 0:
+        user.name = request.POST['name']
+        if len(request.POST['password']) > 0:
+            user.password = request.POST['password']
+        user.email = request.POST['email']
+        user.role = request.POST['role']
+        user.last_updated = timezone.now()
+        user.failed_logins = int(request.POST['failed_logins'])
+        user.save()
+        # else:
+        #     # add device to this user
+        #     add_device_to_user(int(request.POST['addnewrpi']), id)
         context['message'] = 'data saved'
     elif id != None:
         # display data existing user
