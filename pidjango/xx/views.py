@@ -712,18 +712,18 @@ def useredit(request, id=None):
         return HttpResponseRedirect('/../index.html')
     elif request.method == 'POST':
         # save data existing user
-        # if int(request.POST['addnewrpi']) == 0:
-        user.name = request.POST['name']
-        if len(request.POST['password']) > 0:
-            user.password = request.POST['password']
-        user.email = request.POST['email']
-        user.role = request.POST['role']
-        user.last_updated = timezone.now()
-        user.failed_logins = int(request.POST['failed_logins'])
-        user.save()
-        # else:
-        #     # add device to this user
-        #     add_device_to_user(int(request.POST['addnewrpi']), id)
+        if int(request.POST['addnewrpi']) == 0:
+            user.name = request.POST['name']
+            if len(request.POST['password']) > 0:
+                user.password = request.POST['password']
+            user.email = request.POST['email']
+            user.role = request.POST['role']
+            user.last_updated = timezone.now()
+            user.failed_logins = int(request.POST['failed_logins'])
+            user.save()
+        else:
+            # add device to this user
+            add_device_to_user(int(request.POST['addnewrpi']), id)
         context['message'] = 'data saved'
     elif id != None:
         # display data existing user
@@ -787,3 +787,7 @@ def xrpis(request):
 @xframe_options_sameorigin
 def nextcloud(request):
     return render(request, 'iframe.html', {})
+
+
+def new_devices(request):
+    return render(request, "new_devices_list.html", {})
