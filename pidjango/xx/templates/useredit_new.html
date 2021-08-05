@@ -22,26 +22,19 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h5> CREATE USER</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <form action="/useredit" method="post" autocomplete="off">
-                                            {% csrf_token %}
-                                            <input type=hidden name=xxid value="{{ xxid }}">
-                                            {{ form.as_p }}
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
 
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="card-header">
                             <h5>Current Devices</h5>
                         </div>
+                        <table width=100%>
+                            <form action="/useredit" method="post" autocomplete="off">{% csrf_token %}
+                                <input type=hidden name=xxid value="{{ xxid }}">
+                                {{ form }}
+                                <br>
+                                <button type="submit" class="btn btn-primary">SAVE</button>
+                        </table>
                         <table class="table">
                             <thead>
                             <tr>
@@ -63,26 +56,21 @@
                                 <td>{{ value.created }}
                             </tr>
                             {% endfor %}
-                            <!--                                        <button type="button" class="btn btn-danger" title="btn btn-danger" data-toggle="tooltip">Danger</button>-->
-                            </tbody>
+                            <tr style="font-weight: bold;">
+                                <td>Add device</td>
+                                <td>
+                                    <select name=addnewrpi>
+                                        <option value=0>Choose one
+                                            {% for value in newrpis %}
+                                        <option value={{ value.id }}>{{ value.id }} {{ value.computernr}}
+                                            {% endfor %}
+                                    </select>
+                                </td>
+                                <td rowspan=2 valign=bottom>
+                                    <input type=submit value=ADD class="btn btn-primary">
+                                </td>
+                            <tr>
                         </table>
-<!--                        <table>-->
-<!--                            <tr style="font-weight: bold;">-->
-<!--                                <td>-->
-<!--                                <td><br>Add device-->
-<!--                                <td rowspan=2 valign=bottom>-->
-<!--                                    <input type=submit value=ADD class="btn btn-primary">-->
-<!--                            <tr>-->
-<!--                                <td>-->
-<!--                                <td>&lt;!&ndash; form action="/xx/useredit" method="post" &ndash;&gt;-->
-<!--                                    <select name=addnewrpi>-->
-<!--                                        <option value=0>Choose one-->
-<!--                                            {% for value in newrpis %}-->
-<!--                                        <option value={{ value.id }}>{{ value.id }} {{ value.computernr}}-->
-<!--                                            {% endfor %}-->
-<!--                                    </select>-->
-<!--                                <td>-->
-<!--                        </table>-->
                     </div>
                 </div>
             </div>

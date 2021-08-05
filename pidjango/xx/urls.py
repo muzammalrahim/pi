@@ -33,4 +33,5 @@ urlpatterns = [
     path('xnewrpi', views.xnewrpi, name='xnewrpi'),
     path('xrpis', views.xrpis, name='xrpis'),
     path('nextcloud', views.nextcloud, name='nextcloud'),
+    path('new_devices', views.new_devices, name='new_devices'),
 ]
