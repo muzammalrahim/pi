@@ -17,6 +17,8 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.clickjacking import xframe_options_sameorigin
+from django import template
+from .models import Xuser
 
 
 def add_device_to_user(newrpi_id, user_id):
@@ -781,7 +783,7 @@ def xrpis(request):
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
         context['newrpis'] = table_bg_color(Rpi.objects.filter(xuser_id=xuser.id).order_by('created'))
-        return render(request, 'xrpis.html', context)
+        return render(request, 'xrpis_new.html', context)
 
 
 @xframe_options_sameorigin
@@ -791,3 +793,4 @@ def nextcloud(request):
 
 def new_devices(request):
     return render(request, "new_devices_list.html", {})
+
