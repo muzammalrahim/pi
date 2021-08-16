@@ -1,5 +1,4 @@
 from django import template
-
 from xx.models import Xuser
 
 register = template.Library()
@@ -12,4 +11,4 @@ def has_group(user, group_name):
         group = Xuser.objects.get(role=group_name)
     except Xuser.DoesNotExist:
         return False
-    return group
+    return True
