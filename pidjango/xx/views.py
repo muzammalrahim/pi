@@ -291,11 +291,11 @@ def checklogin(request):
             xuser.save()
             context = {'message': 'Too many failed logins'}
             return render(request, 'login.html', context)
-        if xuser.activation_code != '' and xuser.activation_code != None:
-            xuser.failed_logins = 1 + xuser.failed_logins
-            xuser.save()
-            context = {'message': 'Account not activated'}
-            return render(request, 'login.html', context)
+        # if xuser.activation_code != '' and xuser.activation_code != None:
+        #     xuser.failed_logins = 1 + xuser.failed_logins
+        #     xuser.save()
+        #     context = {'message': 'Account not activated'}
+        #     return render(request, 'login.html', context)
         elif xuser.password == request.POST['password']:
             request.session['lastactive'] = time.time()
             request.session['userid'] = request.POST['userid']
@@ -573,6 +573,7 @@ def register(request):
         xuser.name = form.cleaned_data['name']
         xuser.userid = form.cleaned_data['userid'].lower()
         xuser.password = form.cleaned_data['password']
+        xuser.password2 = form.cleaned_data['password']
         xuser.email = form.cleaned_data['email']
         sstr = int(datetime.datetime.now().strftime('%s')) % 9377
         xuser.activation_code = "{:04d}".format(sstr)
@@ -793,4 +794,3 @@ def nextcloud(request):
 
 def new_devices(request):
     return render(request, "new_devices_list.html", {})
-
