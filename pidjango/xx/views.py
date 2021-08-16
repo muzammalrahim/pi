@@ -291,11 +291,11 @@ def checklogin(request):
             xuser.save()
             context = {'message': 'Too many failed logins'}
             return render(request, 'login.html', context)
-        # if xuser.activation_code != '' and xuser.activation_code != None:
-        #     xuser.failed_logins = 1 + xuser.failed_logins
-        #     xuser.save()
-        #     context = {'message': 'Account not activated'}
-        #     return render(request, 'login.html', context)
+        if xuser.activation_code != '' and xuser.activation_code != None:
+            xuser.failed_logins = 1 + xuser.failed_logins
+            xuser.save()
+            context = {'message': 'Account not activated'}
+            return render(request, 'login.html', context)
         elif xuser.password == request.POST['password']:
             request.session['lastactive'] = time.time()
             request.session['userid'] = request.POST['userid']
@@ -304,6 +304,7 @@ def checklogin(request):
             xuser.failed_logins = 0
             xuser.save()
             context['menu'] = xuser.get_menu()
+            context['user'] = xuser
             context['content'] = 'Latest news: we just sold rpi number 250 !.'
             return render(request, 'home.html', context)
         else:
