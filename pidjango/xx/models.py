@@ -16,7 +16,7 @@ class Xuser(models.Model):
     last_login = models.DateTimeField()
     created = models.DateTimeField(blank=True, auto_now_add=True)
     support_end_date = models.DateField(blank=True, default='2021-05-22')
-    last_updated = models.DateTimeField(blank=True)
+    last_updated = models.DateTimeField(null=True, blank=True)
     failed_logins = models.IntegerField(blank=True, default=0)
     ROLES = [
         ('admin', 'admin'),
