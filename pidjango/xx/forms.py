@@ -508,6 +508,13 @@ class XuserForm(forms.Form):
                 "class": "form-control"
             }
         ))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
     role = forms.TypedChoiceField(required=False, choices=ROLES)
 
     # failed_logins = forms.IntegerField()
