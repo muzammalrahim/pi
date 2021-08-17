@@ -10,5 +10,9 @@ def has_group(user, group_name):
         group = Xuser.objects.get(email=user.email)
         if group.role == group_name:
             return True
+        else:
+            return False
     except Xuser.DoesNotExist:
-        group = None
+        return False
+
+    return group

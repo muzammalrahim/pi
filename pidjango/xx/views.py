@@ -327,6 +327,7 @@ def clicommanddelete(request, id):
         xuser = Xuser.objects.get(userid=request.session['userid'])
         clicommand = CliCommand.objects.get(pk=id).delete()
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['message'] = 'command deleted'
         context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
         return render(request, 'clicommands_list.html', context)
@@ -336,6 +337,7 @@ def clicommandedit(request, id=None):
     context = check_user(request)
     xuser = Xuser.objects.get(userid=request.session['userid'])
     context['menu'] = xuser.get_menu()
+    context['user'] = xuser
     if id == None:
         id = request.session['id_clicommand']
     else:
@@ -370,6 +372,7 @@ def clicommandnew(request):
     context = check_user(request)
     xuser = Xuser.objects.get(userid=request.session['userid'])
     context['menu'] = xuser.get_menu()
+    context['user'] = xuser
     request.session['id_clicommand'] = None
     if not context['loggedin']:
         return HttpResponseRedirect('/../index.html')
@@ -407,6 +410,7 @@ def clicommands(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         bgcolor = 'ffffff'
         context['clicommands'] = table_bg_color(CliCommand.objects.order_by('code'))
         return render(request, 'clicommands_list.html', context)
@@ -418,6 +422,7 @@ def home(request):
         return HttpResponseRedirect('/../index.html')
     else:
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['content'] = '<h2>hijklm</h2>'
         return render(request, 'home.html', context)
 
@@ -443,11 +448,13 @@ def myaccount(request):
             context['form'] = MyAccountForm(initial=xuser.__dict__)
             context['message'] = 'please repair invalid data x'
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['userid'] = xuser.userid
         return render(request, 'myaccount_list.html', context)
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['userid'] = xuser.userid
         context['form'] = MyAccountForm(initial=xuser.__dict__)
         return render(request, 'myaccount_list.html', context)
@@ -481,11 +488,13 @@ def password(request):
             context['form'] = PasswordForm(xuser.__dict__)
             context['message'] = 'passwords dont match'
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['userid'] = xuser.userid
         return render(request, 'password_reset.html', context)
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['userid'] = xuser.userid
         context['form'] = PasswordForm(initial=xuser.__dict__)
         return render(request, 'password_reset.html', context)
@@ -501,6 +510,7 @@ def newnetworkedit(request):
         context['xxid'] = request.session['id_rpi']
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['form'] = NewNetworkForm()
         return render(request, 'newnetworkedit_new.html', context)
 
@@ -607,6 +617,7 @@ def rpiclicommand(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['rpiclicommands'] = table_bg_color(RpiCliCommand.objects.filter(rpi=id).order_by('-created'))
         return render(request, 'rpiclicommand_new.html', context)
@@ -623,6 +634,7 @@ def rpiedit(request, id=None):
         return HttpResponseRedirect('/../index.html')
     elif id == None:
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         return render(request, 'home.html', context)
     request.session['id_rpi'] = id
     context = {}
@@ -646,6 +658,7 @@ def rpilogline(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
         context['rpiloglines'] = table_bg_color(RpiLogline.objects.filter(rpi=id).order_by('-created'))
         return render(request, 'rpilogline_new.html', context)
@@ -687,6 +700,7 @@ def newrpi(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['newrpis'] = NewRpi.objects.all().order_by('created')
         return render(request, 'new_device.html', context)
 
@@ -733,6 +747,7 @@ def useredit(request, id=None):
         # display data existing user
         user = Xuser.objects.get(pk=id)
     context['menu'] = xuser.get_menu()
+    context['user'] = xuser
     context['xxid'] = id
     context['form'] = XuserForm(initial=user.__dict__)
     context['rpis'] = table_bg_color(user.rpi_set.all())
@@ -747,6 +762,7 @@ def users(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         bgcolor = 'ffffff'
         # context['users'] = Xuser.objects.filter(xuser=id).order_by('name')
         context['users'] = table_bg_color(Xuser.objects.order_by('name'))
@@ -761,6 +777,7 @@ def xnewrpi(request):
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['form'] = XnewRpiForm()
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['userid'] = xuser.userid
 
         if request.method == 'POST':
@@ -784,6 +801,7 @@ def xrpis(request):
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['menu'] = xuser.get_menu()
+        context['user'] = xuser
         context['newrpis'] = table_bg_color(Rpi.objects.filter(xuser_id=xuser.id).order_by('created'))
         return render(request, 'xrpis_new.html', context)
 
