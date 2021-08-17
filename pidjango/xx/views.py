@@ -520,6 +520,7 @@ def newnetworks(request):
     context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
     xuser = Xuser.objects.get(userid=request.session['userid'])
     context['menu'] = xuser.get_menu()
+    context['menu'] = xuser.get_menu()
     if not context['loggedin']:
         return HttpResponseRedirect('/../index.html')
     elif request.method == 'POST':
@@ -640,6 +641,7 @@ def rpiedit(request, id=None):
     context = {}
     context['message'] = 'Cant find an device'
     context['menu'] = xuser.get_menu()
+    context['menu'] = xuser.get_menu()
     # context['breadcrum'] = 'userr:' + str(request.session['rpi']) + 'X' + str(request.session['user']) + 'X'
     # context['breadcrum'] = [{'user': request.session['user']}, {'rpi': request.session['rpi']}]
     context['breadcrumb'] = {'user': request.session['id_user'], 'rpi': request.session['id_rpi']}
@@ -668,6 +670,7 @@ def settings(request):
     context = check_user(request)
     xuser = Xuser.objects.get(userid=request.session['userid'])
     context['menu'] = xuser.get_menu()
+    context['user'] = xuser
     try:
         settings = Settings.objects.get(id=1)
         context['form'] = SettingsForm(initial=settings.__dict__)
