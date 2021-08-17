@@ -17,6 +17,8 @@
 
                     <label>Forms & table</label>
                 </li>
+
+                {% if user|has_group:"admin" %}
                 <li data-username="form elements advance componant validation masking wizard picker select"
                     class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
                     <a href="{% url 'newrpi' %}" class="nav-link "><span class="pcoded-micon"><i
@@ -67,6 +69,47 @@
                             class="pcoded-mtext">Next</span>
                     </a>
                 </li>
+                {% else %}
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="{% url 'newrpi' %}" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span
+                            class="pcoded-mtext">New Devices</span></a>
+                </li>
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="{% url 'clicommands' %}" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">Cli Commands</span></a>
+                </li>
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="{% url 'myaccount' %}" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">My Account</span></a>
+                </li>
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="{% url 'password' %}" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">Reset Password</span></a>
+                </li>
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="/" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">Logout</span></a>
+                </li>
+
+                <li data-username="form elements advance componant validation masking wizard picker select"
+                    class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
+                    <a href="{% url 'nextcloud' %}" class="nav-link "><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">Next</span>
+                    </a>
+                </li>
+
+                {% endif %}
 
 
             </ul>
