@@ -471,11 +471,12 @@ def password(request):
             xuser.password = form.cleaned_data['password']
             xuser.last_updated = timezone.now()
             xuser.save()
+            # clicommand = CliCommand.objects.get(code='newpassword')
             rr = Rpi.objects.filter(xuser=xuser)
             for rpi in rr:
                 rpiclicommand = RpiCliCommand()
                 rpiclicommand.rpi = rpi
-                rpiclicommand.sent = clicommand.command
+                # rpiclicommand.sent = clicommand.command
                 rpiclicommand.created = timezone.now()
                 rpiclicommand.save()
             context['form'] = PasswordForm(initial=xuser.__dict__)
