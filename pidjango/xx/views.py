@@ -811,14 +811,14 @@ def xrpis(request):
 
 @xframe_options_sameorigin
 def nextcloud(request):
-    return render(request, 'iframe.html', {})
-
-
-def new_devices(request):
     context = check_user(request)
     if not context['loggedin']:
         return HttpResponseRedirect('/../index.html')
     else:
         xuser = Xuser.objects.get(userid=request.session['userid'])
         context['user'] = xuser
-        return render(request, "new_devices_list.html", context)
+        return render(request, 'iframe.html', context)
+
+
+def new_devices(request):
+    return render(request, "new_devices_list.html", {})
