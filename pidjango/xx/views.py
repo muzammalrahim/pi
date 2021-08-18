@@ -822,4 +822,10 @@ def nextcloud(request):
 
 
 def new_devices(request):
-    return render(request, "new_devices_list.html", {})
+    context = check_user(request)
+    if not context['loggedin']:
+        return HttpResponseRedirect('/../index.html')
+    else:
+        xuser = Xuser.objects.get(userid=request.session['userid'])
+        context['user'] = xuser
+        return render(request, "new_devices_list.html", {})
