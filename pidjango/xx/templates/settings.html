@@ -14,7 +14,7 @@
 {% endblock %}
 {% block content %}
   <table width=100%>
-    <form action="/xx/settings" method="post">{% csrf_token %}
+    <form action="/settings" method="post">{% csrf_token %}
     {{ form }}{{ form.errors }}
     <br><button type="submit" class="btn btn-primary">SAVE</button>
     </form>
