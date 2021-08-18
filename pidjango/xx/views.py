@@ -672,14 +672,18 @@ def settings(request):
     xuser = Xuser.objects.get(userid=request.session['userid'])
     context['menu'] = xuser.get_menu()
     context['user'] = xuser
+
     try:
+        global settings
         settings = Settings.objects.get(id=1)
         context['form'] = SettingsForm(initial=settings.__dict__)
     except:
         context['form'] = SettingsForm()
     if not context['loggedin']:
         return HttpResponseRedirect('/../index.html')
+
     if request.method == 'POST':
+        settings = Settings.objects.get(id=1)
         form = SettingsForm(data=request.POST)
         settings.sender = request.POST['sender']
         settings.smtp_server = request.POST['smtp_server']
