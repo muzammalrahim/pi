@@ -1,0 +1,72 @@
+{% extends "home.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">New Devices Table</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+                    <!-- [ basic-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Basic Table </h5>
+                            </div>
+                            <div class="card-block table-border-style pt-0">
+                                <div class="table-responsive">
+                                    <form action="xnewrpi" method="post">{% csrf_token %}
+                                        <table width=50%>
+                                            <tr><!--td width=33%><td width=33% -->
+                                                {% if errorr != '' %}
+                                                <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label"
+                                                           style="color: red;">{{ error }}</label>
+                                                </div>
+                                                {% endif %}
+
+                                                <table width=100%>
+                                                    <form action="/xx/myaccount" method="post">
+                                                        <input type=hidden name=userid value="{{ userid }}">
+                                                        {{ form }}
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary">REGISTER</button>
+                                                    </form>
+                                                </table>
+
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
