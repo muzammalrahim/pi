@@ -795,7 +795,7 @@ def xnewrpi(request):
                 #			form = XnewRpiForm(data=request.POST)
                 context['message'] = 'Check entered data'
                 context['form'] = XnewRpiForm(request.POST)
-        return render(request, 'xnewrpi.html', context)
+        return render(request, 'xnewrpi_new.html', context)
 
 
 def xrpis(request):
